@@ -4,7 +4,7 @@ import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface CacheRequest  {
@@ -19,7 +19,7 @@ public @interface CacheRequest  {
      *
      * ③key，不根据参数生成缓存，自定义配置，便于后续有更新操作无法处理，具体可以看下面aop的clearCache方法
      */
-    int expire() default 60;
+    long expire() default 60;
 
     /**
      * 自定义key，后续便于其它接口清理缓存。若无更新操作，可忽略此配置

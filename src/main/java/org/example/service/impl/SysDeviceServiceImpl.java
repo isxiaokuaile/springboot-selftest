@@ -1,6 +1,8 @@
 package org.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.example.common.annotation.CacheDelete;
+import org.example.common.annotation.CacheRequest;
 import org.example.domain.entity.DeviceEntity;
 import org.example.domain.mapper.DeviceMapper;
 import org.example.dto.device.*;
@@ -73,8 +75,10 @@ public class SysDeviceServiceImpl implements SysDeviceService {
     }
 
     @Override
-    @CacheEvict(value = "device",allEntries = true)
-    @Cacheable
+//    @CacheEvict(value = "device",allEntries = true)
+//    @Cacheable
+//    @CacheRequest(key = "delete")
+    @CacheDelete(key = "keyWord")
     public Boolean delete(InDeleteDeviceDto dto) {
         DeviceEntity entity = deviceMapper.selectById(dto.getDeviceId());
         return deviceMapper.deleteById(entity) > 0;
